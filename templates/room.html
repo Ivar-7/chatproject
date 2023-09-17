@@ -1,0 +1,37 @@
+<!-- Load ajax -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script> -->
+
+<h1 style="text-align: center; color: blueviolet;"> {{ room }}</h1>
+
+<form id="post-form">
+    {% csrf_token %}
+    <div style="text-align: center;">
+        <input type="hidden" id="username" name="username" value="{{ username }}" />
+        <input type="hidden"id="room_id"  name="room_id" value="{{room_details.id}}" />
+        <input type="text" id="message" name="message" placeholder="Message" width="100px"/>
+        <input type="submit" value="send" />
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).on('submit', '#post-form', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type:'POST',
+            url:'/send',
+            data:{
+                username:$('#username').val(),
+                room_id:$('#room_id').val(),
+                message:$('#message').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(data) {
+                alert(data)
+            }
+        });
+        document.getElementById('message').value
+    });
+</script>

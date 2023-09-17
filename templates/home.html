@@ -1,0 +1,14 @@
+<h1 style="background-color: grey; color: blue; text-align: center; margin-top: 0%;"> <b>Chat Django </b></h1>
+
+<form method="POST" action="checkroom">
+    {% csrf_token %}
+    <div style="text-align: center;">
+        <p>Room name</p>
+        <input type="text" name="room_name" />
+        <p>Username</p>
+        <input type="text" name="username" />
+    </div>
+    <div style="text-align: center; margin-top: 0.3cm;">
+        <input type="submit" />
+    </div>
+</form>
